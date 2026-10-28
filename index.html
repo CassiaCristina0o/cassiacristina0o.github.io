@@ -82,7 +82,7 @@ nav{height:96px;padding:0 var(--margem);display:flex;align-items:center;justify-
 #contato .texto{display:flex;flex-direction:column;gap:24px;max-width:560px}
 #contato .redes{display:flex;flex-direction:column;gap:14px;margin-top:8px}
 #contato .redes a{display:flex;align-items:center;gap:12px;font-size:16px}
-#contato .qr{width:200px;height:200px;flex-shrink:0;border:1.5px dashed var(--linha);border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--fundo);font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--texto-suave);text-align:center;padding:0 16px}
+#contato .qr{width:200px;height:200px;flex-shrink:0;border-radius:12px;display:block}
 
 footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--texto-suave)}
 
@@ -136,7 +136,7 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
   #contato .texto{align-items:center;gap:16px}
   #contato .redes{align-items:center;gap:14px}
   #contato .redes a{font-size:14px;gap:10px}
-  #contato .qr{width:168px;height:168px;font-size:11px}
+  #contato .qr{width:168px;height:168px}
 
   footer{flex-direction:column;gap:6px;padding:20px var(--margem);font-size:11px}
 }
@@ -278,7 +278,7 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
       </a>
     </div>
   </div>
-  <div class="qr">QR CODE<br>(gerado quando<br>o site estiver no ar)</div>
+  <img class="qr" src="qrcode.svg" alt="QR code que abre este site: cassiacristina0o.github.io">
 </section>
 
 <footer>
