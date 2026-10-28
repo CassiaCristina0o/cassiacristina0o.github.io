@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cassia Cristina — Automação e integração em Python</title>
+<meta name="description" content="Portfólio de Cassia Cristina: automação e integração em Python com foco em confiabilidade operacional.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --fundo:#01160F;
+  --painel:rgba(1,30,22,0.78);
+  --painel-demo:#011E16;
+  --linha:rgba(201,164,92,0.22);
+  --ouro:#C9A45C;
+  --vinho:#6E1A1F;
+  --vinho-suave:rgba(110,26,31,0.45);
+  --texto:#EDE6DA;
+  --texto-suave:#A8B5AC;
+  --margem:clamp(24px,7vw,100px);
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(rgba(1,22,15,0.35),rgba(1,22,15,0.35)) fixed,var(--fundo) url(fundo.jpg) center/cover fixed;font-family:'IBM Plex Sans',sans-serif;color:var(--texto)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,p{margin:0}
+.pagina{width:100%;display:flex;flex-direction:column}
+.mono{font-family:'JetBrains Mono',monospace}
+.rotulo{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.12em;color:var(--ouro);text-transform:uppercase}
+.titulo-secao{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,4vw,42px)}
+.link:hover{color:var(--ouro)}
+.btn-vinho{font-size:15px;font-weight:500;color:var(--texto);background:var(--vinho);border-radius:8px;padding:14px 26px}
+.btn-vinho:hover{opacity:.9}
+.btn-borda{align-self:flex-start;font-size:14px;font-weight:500;color:var(--texto);border:1px solid var(--linha);border-radius:8px;padding:10px 18px}
+.btn-borda:hover{border-color:var(--ouro);color:var(--ouro)}
+.pilula{display:inline-flex;align-self:flex-start;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ouro);background:var(--vinho-suave);border-radius:999px;padding:5px 12px}
+.so-mobile{display:none}
+
+nav{height:96px;padding:0 var(--margem);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--linha)}
+.marca{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;letter-spacing:.02em}
+.marca span{color:var(--ouro)}
+.nav-direita{display:flex;align-items:center;gap:40px}
+.nav-direita .secoes{display:flex;gap:40px}
+.nav-direita .secoes a{font-size:15px;opacity:.85}
+.nav-redes{display:flex;gap:16px}
+.chip-rede{display:flex;align-items:center;gap:8px;font-size:14px;font-family:'JetBrains Mono',monospace;color:var(--texto-suave);border:1px solid var(--linha);border-radius:8px;padding:8px 14px}
+
+#topo{min-height:620px;padding:96px var(--margem) 80px;display:flex;align-items:center;justify-content:space-between;gap:60px}
+#topo .texto{display:flex;flex-direction:column;gap:28px}
+#topo h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(44px,7vw,88px);line-height:1.04;letter-spacing:-.01em}
+#topo .lema{font-size:clamp(20px,2.4vw,26px);line-height:1.4;max-width:760px}
+#topo .lema em{font-family:'Fraunces',serif;color:var(--ouro)}
+#topo .botoes{display:flex;gap:16px;margin-top:20px}
+#topo img{width:340px;height:340px;object-fit:cover;object-position:50% 18%;border-radius:50%;border:2px solid var(--ouro);box-shadow:0 0 60px rgba(0,120,85,.45);flex-shrink:0}
+
+#sobre-mim{padding:72px var(--margem);display:flex;flex-direction:column;gap:20px;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+#sobre-mim p{max-width:1000px;font-size:clamp(16px,1.6vw,22px);line-height:1.65}
+
+#projetos{padding:100px var(--margem);display:flex;flex-direction:column;gap:48px}
+#projetos .cab{display:flex;flex-direction:column;gap:12px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.card{background:var(--painel);border:1px solid var(--linha);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:18px}
+.card h3{font-size:21px;font-weight:600;line-height:1.3}
+.card p{font-size:15px;line-height:1.6;color:var(--texto-suave);flex-grow:1}
+.card .tecnologias{padding-top:8px;border-top:1px solid var(--linha);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--texto-suave)}
+
+#demo{padding:0 var(--margem) 100px;display:flex;flex-direction:column;gap:40px}
+.demo{background:var(--painel-demo);border:1px solid var(--linha);border-radius:16px;padding:40px;display:flex;gap:48px;align-items:stretch}
+.demo .texto{flex:1;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.demo h3{font-size:28px;font-weight:600;line-height:1.3}
+.demo .destaque{font-size:17px;line-height:1.6}
+.demo .detalhe{font-size:15px;line-height:1.6;color:var(--texto-suave)}
+.demo .btn-borda{font-size:15px;padding:13px 26px}
+.demo .tecnologias{padding-top:12px;border-top:1px solid var(--linha);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--texto-suave)}
+.demo .tela{flex:0 0 540px;height:540px;border:1px solid var(--linha);border-radius:12px;overflow:hidden}
+.demo iframe{width:100%;height:100%;border:0;display:block}
+
+#stack{padding:0 var(--margem) 100px;display:flex;flex-direction:column;gap:24px}
+#stack .tags{display:flex;flex-wrap:wrap;gap:12px;max-width:980px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:14px;border:1px solid var(--linha);border-radius:8px;padding:8px 16px}
+
+#contato{padding:100px var(--margem);background:var(--painel);border-top:1px solid var(--linha);display:flex;justify-content:space-between;align-items:center;gap:80px}
+#contato .texto{display:flex;flex-direction:column;gap:24px;max-width:560px}
+#contato .redes{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+#contato .redes a{display:flex;align-items:center;gap:12px;font-size:16px}
+#contato .qr{width:200px;height:200px;flex-shrink:0;border:1.5px dashed var(--linha);border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--fundo);font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--texto-suave);text-align:center;padding:0 16px}
+
+footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--texto-suave)}
+
+@media (max-width:1000px){
+  .cards{grid-template-columns:1fr}
+  .demo{flex-direction:column;padding:28px;gap:28px}
+  .demo .tela{flex:none;height:480px;width:100%}
+  #contato{gap:48px}
+}
+
+@media (max-width:700px){
+  .so-desktop{display:none}
+  .so-mobile{display:inline}
+  nav{height:64px}
+  .marca{font-size:15px}
+  .nav-direita .secoes{display:none}
+  .nav-redes{gap:12px}
+  .chip-rede{padding:8px}
+  .chip-rede .nome{display:none}
+  .rotulo{font-size:12px;letter-spacing:.1em}
+
+  #topo{min-height:0;flex-direction:column-reverse;align-items:stretch;gap:28px;padding:48px var(--margem) 40px}
+  #topo .texto{gap:16px}
+  #topo .botoes{flex-direction:column;gap:12px;margin-top:16px;align-self:stretch}
+  #topo .botoes a{text-align:center;padding:14px 22px}
+  #topo img{width:168px;height:168px;align-self:flex-start;box-shadow:0 0 40px rgba(0,120,85,.45)}
+
+  #sobre-mim{padding:40px var(--margem);gap:14px}
+  #projetos{padding:48px var(--margem);gap:28px}
+  #projetos .cab{gap:8px}
+  .card{padding:22px;gap:14px;border-radius:14px}
+  .card h3{font-size:18px}
+  .card p{font-size:14px;line-height:1.55}
+  .card .btn-borda{font-size:13px;padding:9px 16px}
+  .pilula{font-size:11px;padding:4px 10px}
+
+  #demo{padding:0 var(--margem) 48px;gap:20px}
+  .demo{padding:22px;gap:14px;border-radius:14px}
+  .demo .texto{gap:14px}
+  .demo h3{font-size:18px}
+  .demo .destaque{font-size:14.5px}
+  .demo .detalhe{font-size:14px}
+  .demo .btn-borda{font-size:14px;padding:11px 20px}
+  .demo .tela{height:440px}
+
+  #stack{padding:0 var(--margem) 48px;gap:16px}
+  #stack .tags{gap:8px}
+  .tag{font-size:12px;padding:6px 12px}
+
+  #contato{padding:48px var(--margem);flex-direction:column-reverse;align-items:center;gap:32px}
+  #contato .texto{align-items:center;gap:16px}
+  #contato .redes{align-items:center;gap:14px}
+  #contato .redes a{font-size:14px;gap:10px}
+  #contato .qr{width:168px;height:168px;font-size:11px}
+
+  footer{flex-direction:column;gap:6px;padding:20px var(--margem);font-size:11px}
+}
+</style>
+</head>
+<body>
+<div class="pagina">
+
+<nav>
+  <div class="marca">cassia<span>.</span>cristina</div>
+  <div class="nav-direita">
+    <div class="secoes">
+      <a href="#sobre-mim" class="link">Sobre</a>
+      <a href="#projetos" class="link">Projetos</a>
+      <a href="#contato" class="link">Contato</a>
+    </div>
+    <div class="nav-redes">
+      <a href="https://github.com/CassiaCristina0o" aria-label="GitHub de Cassia Cristina" class="chip-rede link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        <span class="nome">GitHub</span>
+      </a>
+      <a href="https://www.linkedin.com/in/cassia-cristina-ribeiro-734709255" aria-label="LinkedIn de Cassia Cristina" class="chip-rede link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.5 0h-11A2.5 2.5 0 0 0 0 2.5v11A2.5 2.5 0 0 0 2.5 16h11a2.5 2.5 0 0 0 2.5-2.5v-11A2.5 2.5 0 0 0 13.5 0ZM4.94 13.44H2.4V6h2.54v7.44ZM3.67 4.93a1.47 1.47 0 1 1 0-2.94 1.47 1.47 0 0 1 0 2.94Zm9.77 8.51h-2.53V9.83c0-.86-.02-1.97-1.2-1.97-1.2 0-1.39.94-1.39 1.91v3.67H5.8V6h2.43v1.02h.03c.34-.64 1.16-1.32 2.39-1.32 2.56 0 3.03 1.68 3.03 3.87v3.87Z"/></svg>
+        <span class="nome">LinkedIn</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section id="topo">
+  <div class="texto">
+    <div class="rotulo">Python · Automação · Integração de sistemas</div>
+    <h1>Cassia Cristina</h1>
+    <p class="lema">Automação e integração em Python com foco em <em>confiabilidade operacional</em>.</p>
+    <div class="botoes">
+      <a href="#projetos" class="btn-vinho">Ver projetos</a>
+      <a href="#contato" class="btn-vinho">Falar comigo</a>
+    </div>
+  </div>
+  <img src="avatar.jpg" alt="Avatar de Cassia Cristina">
+</section>
+
+<section id="sobre-mim">
+  <div class="rotulo">Sobre mim</div>
+  <p>Tudo começou na infância, com a robótica. Depois, trabalhando em loja, conheci sistemas e Excel, e com eles o gosto pelos processos. Quando comecei com Python e dados, a web3 cruzou o meu caminho e eu fiquei encantada com tudo. Construí bots para a comunidade Zcash e, em um estágio em inteligência de dados, aprendi o quanto uma boa arquitetura importa: é ela que traz confiança na operação e na entrega final.</p>
+  <p>Nada mais incrível do que ver uma automação, uma integração ou um ETL fazendo o processo do começo ao fim. É como fazer um bolo e, no fim, a alegria e o cheiro maravilhoso do resultado, feito com amor e dedicação.</p>
+</section>
+
+<section id="projetos">
+  <div class="cab">
+    <div class="rotulo">Projetos</div>
+    <h2 class="titulo-secao">O que eu construí</h2>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="pilula">Automação de comunidades</div>
+      <h3>Bot de bom dia e sorteio no Discord</h3>
+      <p>Bot da comunidade Zcash no Discord que responde a bom dia e boa noite em cinco idiomas, com mensagem, figurinha e reação, e a cada 15 a 20 dias sorteia um prêmio entre quem participou. Os vencedores ficam num banco de dados, para ninguém ganhar duas vezes seguidas, e a lista completa sai num arquivo quando alguém pede.</p>
+      <a href="https://github.com/CassiaCristina0o/Zm-bot-" class="btn-borda">Ver o código no GitHub</a>
+      <div class="tecnologias">Python · discord.py · Peewee · SQLite</div>
+    </div>
+
+    <div class="card">
+      <div class="pilula">Integração GitHub ↔ Discord</div>
+      <h3>Upstreamer: PRs do GitHub no Discord</h3>
+      <p>Bot que acompanha um fork e os pull requests enviados ao repositório original. Cada push chega na hora numa sala do Discord, com um botão que leva o commit para a sala de acompanhamento quando ele está num PR aberto. Um painel mostra se o fork está em dia, e um farol de quatro cores mostra a situação de cada PR, revisada quatro vezes ao dia. Roda como Cloudflare Worker em Python, sem banco de dados, com assinatura verificada e só leitura nos repositórios.</p>
+      <a href="https://github.com/CassiaCristina0o/upstreamer" class="btn-borda">Ver o código no GitHub</a>
+      <div class="tecnologias">Python · Cloudflare Workers · GitHub Webhooks · Discord API</div>
+    </div>
+
+    <div class="card">
+      <div class="pilula">Automação de processos</div>
+      <h3>Coleta e tratamento de arquivos</h3>
+      <p>Robô que baixa todo mês os arquivos de um portal público, confere se cada um chegou inteiro e se mudou desde a última vez, limpa os dados e entrega uma planilha organizada. Se um mês não saiu, o site cai ou um arquivo vem quebrado, ele registra a pendência e segue, sem comprometer o lote inteiro. Cada execução deixa log e o histórico das versões baixadas, para auditar.</p>
+      <a href="https://github.com/CassiaCristina0o/analise-cartao-corporativo" class="btn-borda">Ver o código no GitHub</a>
+      <div class="tecnologias">Python · requests · pandas · Excel</div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="rotulo">Veja funcionando</div>
+
+  <div class="demo">
+    <div class="texto">
+      <div class="pilula">Automação de dados (ETL)</div>
+      <h3>Análise do cartão corporativo</h3>
+      <p class="destaque"><strong>ETL em Python que coleta e trata o uso do cartão corporativo do governo federal e entrega uma planilha Excel com os dados organizados em abas.</strong> Clique em ▶ para ver o processo rodando aqui no seu navegador, com uma amostra de 3 meses. Por privacidade (LGPD), dados pessoais como nome e CPF foram ocultados.</p>
+      <p class="detalhe">Robô que coleta todo mês os arquivos do cartão corporativo do governo federal, limpa os dados, descobre o estado de cada transação, separa compra, saque e gasto sigiloso e entrega uma planilha Excel com uma aba para cada visão. Se um mês ainda não saiu ou um arquivo vem quebrado, ele registra a pendência e segue para o próximo.</p>
+      <a href="https://github.com/CassiaCristina0o/analise-cartao-corporativo" class="btn-borda">Ver o código no GitHub</a>
+      <div class="tecnologias">Python · Pandas · SQLite · Excel</div>
+    </div>
+    <div class="tela">
+      <iframe src="demo-etl/" title="Demonstração: o robô do cartão corporativo rodando no navegador" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="texto">
+      <div class="pilula">Tarefa agendada</div>
+      <h3>Notícia do dia às 8h</h3>
+      <p class="destaque"><strong>Tarefa agendada em Python e GitHub Actions que, todo dia às 8h, escolhe uma notícia boa e a publica aqui.</strong></p>
+      <p class="detalhe">Todo dia às 8h, no horário de Brasília, o workflow lê o feed da BBC News Brasil e escolhe uma notícia. Descarta o que tem tema negativo ou político, dá pontos ao que tem palavras positivas e não repete. Guarda só o título, o link e a fonte. Se algo falha, o workflow marca o erro e o GitHub avisa por e-mail; dia sem notícia boa fica registrado no log, sem alerta.</p>
+      <a href="https://github.com/CassiaCristina0o/noticias-diaria" class="btn-borda">Ver o código no GitHub</a>
+      <div class="tecnologias">Python · GitHub Actions · RSS</div>
+    </div>
+    <div class="tela">
+      <iframe src="https://cassiacristina0o.github.io/noticias-diaria/" title="Notícia do dia escolhida pela tarefa agendada" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="rotulo">Stack</div>
+  <div class="tags">
+    <span class="tag">Python</span><span class="tag">FastAPI / Flask</span><span class="tag">SQL</span><span class="tag">Pandas &amp; Polars</span><span class="tag">Discord API</span><span class="tag">Evolution API</span><span class="tag">APIs REST &amp; Webhooks</span><span class="tag">RPA / Selenium</span><span class="tag">OpenPyXL / Excel</span><span class="tag">Pentaho</span><span class="tag">Docker</span><span class="tag">Cloudflare Workers</span><span class="tag">Linux / systemd</span><span class="tag">Git</span><span class="tag">GitHub Actions</span><span class="tag">pytest</span>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="texto">
+    <h2 class="titulo-secao">Vamos conversar</h2>
+    <div class="redes">
+      <a href="https://github.com/CassiaCristina0o" class="link">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        github.com/CassiaCristina0o
+      </a>
+      <a href="https://www.linkedin.com/in/cassia-cristina-ribeiro-734709255" class="link">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.5 0h-11A2.5 2.5 0 0 0 0 2.5v11A2.5 2.5 0 0 0 2.5 16h11a2.5 2.5 0 0 0 2.5-2.5v-11A2.5 2.5 0 0 0 13.5 0ZM4.94 13.44H2.4V6h2.54v7.44ZM3.67 4.93a1.47 1.47 0 1 1 0-2.94 1.47 1.47 0 0 1 0 2.94Zm9.77 8.51h-2.53V9.83c0-.86-.02-1.97-1.2-1.97-1.2 0-1.39.94-1.39 1.91v3.67H5.8V6h2.43v1.02h.03c.34-.64 1.16-1.32 2.39-1.32 2.56 0 3.03 1.68 3.03 3.87v3.87Z"/></svg>
+        <span class="so-desktop">linkedin.com/in/cassia-cristina-ribeiro-734709255</span><span class="so-mobile">LinkedIn</span>
+      </a>
+      <a href="https://discord.com/users/1492246513093574897" class="link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+        ca_0.o
+      </a>
+      <a href="https://x.com/Cristinycr" class="link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg>
+        x.com/Cristinycr
+      </a>
+    </div>
+  </div>
+  <div class="qr">QR CODE<br>(gerado quando<br>o site estiver no ar)</div>
+</section>
+
+<footer>
+  <span>cassia cristina — automação &amp; integração em Python</span>
+  <span>© 2026</span>
+</footer>
+
+</div>
+</body>
+</html>
