@@ -202,7 +202,7 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
     <div class="card">
       <div class="pilula">Integração GitHub ↔ Discord</div>
       <h3>Upstreamer: PRs do GitHub no Discord</h3>
-      <p>Bot que acompanha um fork e os pull requests enviados ao repositório original. Cada push chega na hora numa sala do Discord, com um botão que leva o commit para a sala de acompanhamento quando ele está num PR aberto. Um painel mostra se o fork está em dia, e um farol de quatro cores mostra a situação de cada PR, revisada quatro vezes ao dia. Roda como Cloudflare Worker em Python, sem banco de dados, com assinatura verificada e só leitura nos repositórios.</p>
+      <p>Bot que mantém um time informado sobre os forks e os pull requests enviados ao repositório original, em duas salas do Discord. Na sala privada, um painel fixado mostra se o fork está em dia e cada push chega na hora, com um botão que leva a mudança para a sala do time quando o pull request está aberto. Na sala do time, um painel mostra o ritmo do projeto e cada pull request ganha uma mensagem única, com barra colorida, status e imagem, editada conforme ele avança. Um farol de quatro cores (azul, amarelo, verde e vermelho) é revisado quatro vezes ao dia. Roda como Cloudflare Worker em Python, com o estado guardado nas próprias mensagens, a assinatura de cada requisição verificada e os repositórios lidos por um token somente leitura.</p>
       <a href="https://github.com/CassiaCristina0o/upstreamer" class="btn-borda">Ver o código no GitHub</a>
       <div class="tecnologias">Python · Cloudflare Workers · GitHub Webhooks · Discord API</div>
     </div>
