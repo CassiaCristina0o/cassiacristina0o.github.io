@@ -238,8 +238,8 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
     <div class="texto">
       <div class="pilula">Tarefa agendada</div>
       <h3>Notícia do dia às 8h</h3>
-      <p class="destaque"><strong>Tarefa agendada em Python e GitHub Actions que, todo dia às 8h, escolhe uma notícia boa e a publica aqui.</strong></p>
-      <p class="detalhe">Todo dia às 8h, no horário de Brasília, o workflow lê o feed da BBC News Brasil e escolhe uma notícia. Descarta o que tem tema negativo ou político, dá pontos ao que tem palavras positivas e não repete. Guarda só o título, o link e a fonte. Se algo falha, o workflow marca o erro e o GitHub avisa por e-mail; dia sem notícia boa fica registrado no log, sem alerta.</p>
+      <p class="destaque"><strong>Tarefa agendada em Python e GitHub Actions que escolhe uma notícia por dia e a publica aqui às 8h.</strong></p>
+      <p class="detalhe">Toda manhã o workflow lê o feed da BBC News Brasil e escolhe uma notícia. Descarta o que tem tema negativo ou político, ignora o que não é matéria escrita e não repete. A notícia fica guardada e a página a publica às 8h do dia seguinte, no horário de Brasília. Assim a hora de publicação não depende da hora em que a tarefa roda, que o GitHub pode atrasar por horas. Guarda só o título, o link, a fonte e a miniatura. Se algo falha, o workflow marca o erro e o GitHub avisa por e-mail; dia sem notícia nova fica registrado no log, sem alerta, e a página segue na última publicada.</p>
       <a href="https://github.com/CassiaCristina0o/noticias-diaria" class="btn-borda">Ver o código no GitHub</a>
       <div class="tecnologias">Python · GitHub Actions · RSS</div>
     </div>

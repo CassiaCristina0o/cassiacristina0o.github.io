@@ -7,7 +7,7 @@ Portfólio de automação e integração em Python. É uma página única, em HT
 ## O que tem no site
 
 - **Projetos:** [Zm-bot](https://github.com/CassiaCristina0o/Zm-bot-), [Upstreamer](https://github.com/CassiaCristina0o/upstreamer) e [análise do cartão corporativo](https://github.com/CassiaCristina0o/analise-cartao-corporativo).
-- **Veja funcionando:** o ETL do cartão corporativo rodando no navegador e a [notícia do dia](https://github.com/CassiaCristina0o/noticias-diaria), escolhida todo dia às 8h por uma tarefa agendada.
+- **Veja funcionando:** o ETL do cartão corporativo rodando no navegador e a [notícia do dia](https://github.com/CassiaCristina0o/noticias-diaria), publicada todo dia às 8h, escolhida na véspera por uma tarefa agendada.
 - **Contato:** GitHub, LinkedIn, Discord e X, com um QR code que abre este site.
 
 ## Arquivos
