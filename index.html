@@ -35,13 +35,15 @@ h1,h2,h3,p{margin:0}
 .pilula{display:inline-flex;align-self:flex-start;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ouro);background:var(--vinho-suave);border-radius:999px;padding:5px 12px}
 .so-mobile{display:none}
 
-nav{height:96px;padding:0 var(--margem);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--linha)}
+nav{position:sticky;top:0;z-index:20;height:64px;padding:0 var(--margem);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--linha);background:rgba(1,22,15,.88);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+html{scroll-padding-top:72px}
 .marca{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;letter-spacing:.02em}
 .marca span{color:var(--ouro)}
 .nav-direita{display:flex;align-items:center;gap:40px}
 .nav-direita .secoes{display:flex;gap:40px}
 .nav-direita .secoes a{font-size:15px;opacity:.85}
 .nav-redes{display:flex;gap:16px}
+.nav-cta{font-size:14px;padding:9px 18px;white-space:nowrap}
 .chip-rede{display:flex;align-items:center;gap:8px;font-size:14px;font-family:'JetBrains Mono',monospace;color:var(--texto-suave);border:1px solid var(--linha);border-radius:8px;padding:8px 14px}
 
 #topo{min-height:620px;padding:96px var(--margem) 80px;display:flex;align-items:center;justify-content:space-between;gap:60px}
@@ -64,13 +66,32 @@ nav{height:96px;padding:0 var(--margem);display:flex;align-items:center;justify-
 
 #projetos{padding:100px var(--margem);display:flex;flex-direction:column;gap:48px}
 #projetos .cab{display:flex;flex-direction:column;gap:12px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.card{background:var(--painel);border:1px solid var(--linha);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:18px}
+.carrossel{display:flex;flex-direction:column;gap:24px;min-width:0}
+.cards{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain}
+.cards::-webkit-scrollbar{display:none}
+.cards:focus-visible{outline:2px solid var(--ouro);outline-offset:4px;border-radius:16px}
+.controles{display:flex;align-items:center;justify-content:center;gap:20px}
+.palco{position:relative}
+.seta{position:absolute;top:0;bottom:0;z-index:2;width:var(--margem);padding:0;display:flex;align-items:center;justify-content:center;border:0;background:none;color:var(--ouro);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.seta svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.seta:hover svg{transform:scale(1.25)}
+.seta:focus-visible{outline:2px solid var(--ouro);outline-offset:-4px;border-radius:12px}
+.seta-ant{left:calc(var(--margem) * -1)}
+.seta-prox{right:calc(var(--margem) * -1)}
+.seta:disabled{opacity:0;pointer-events:none}
+.pontos{display:flex;gap:10px}
+.ponto{width:10px;height:10px;padding:0;border-radius:50%;border:1px solid var(--ouro);background:transparent;cursor:pointer}
+.ponto[aria-current="true"]{background:var(--ouro)}
+@media (prefers-reduced-motion:reduce){.cards{scroll-behavior:auto}}
+.card{flex:0 0 calc((100% - 56px) / 3);scroll-snap-align:start;background:var(--painel);border:1px solid var(--linha);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:18px}
 .card h3{font-size:21px;font-weight:600;line-height:1.3}
 .card p{font-size:15px;line-height:1.6;color:var(--texto-suave);flex-grow:1}
 .card .tecnologias{padding-top:8px;border-top:1px solid var(--linha);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--texto-suave)}
 
 #demo{padding:0 var(--margem) 100px;display:flex;flex-direction:column;gap:40px}
+.cards.demos .demo{flex:0 0 100%;min-width:0;scroll-snap-align:start}
+.demo .tela.retrato{--alt:540px;flex:0 0 auto;width:calc(var(--alt) * .5625 - 4px);height:var(--alt);align-self:center;position:relative;background:#000}
+.demo .tela.retrato iframe{position:absolute;top:0;left:50%;transform:translateX(-50%);width:calc(var(--alt) * .5625 + 80px);height:100%}
 .demo{background:var(--painel-demo);border:1px solid var(--linha);border-radius:16px;padding:40px;display:flex;gap:48px;align-items:stretch}
 .demo .texto{flex:1;display:flex;flex-direction:column;justify-content:center;gap:18px}
 .demo h3{font-size:28px;font-weight:600;line-height:1.3}
@@ -107,20 +128,25 @@ nav{height:96px;padding:0 var(--margem);display:flex;align-items:center;justify-
 footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--texto-suave)}
 
 @media (max-width:1000px){
-  .cards{grid-template-columns:1fr}
+  .nav-direita .secoes{display:none}
+  .card{flex-basis:calc((100% - 28px) / 2)}
   .demo{flex-direction:column;padding:28px;gap:28px}
   .demo .tela{flex:none;height:480px;width:100%}
+  .demo .tela.retrato{--alt:480px;width:calc(var(--alt) * .5625 - 4px)}
   #contato{gap:48px}
 }
 
 @media (max-width:700px){
   .so-desktop{display:none}
   .so-mobile{display:inline}
-  nav{height:64px}
-  .marca{font-size:15px}
+  nav{height:56px}
+  html{scroll-padding-top:64px}
+  .nav-cta{font-size:13px;padding:8px 12px}
+  .marca{font-size:14px}
   .nav-direita .secoes{display:none}
   .nav-redes{gap:12px}
-  .chip-rede{padding:8px}
+  .nav-direita{gap:12px}
+  .chip-rede{padding:7px}
   .chip-rede .nome{display:none}
   .rotulo{font-size:12px;letter-spacing:.1em}
 
@@ -133,7 +159,9 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
   #sobre-mim{padding:40px var(--margem);gap:14px}
   #projetos{padding:48px var(--margem);gap:28px}
   #projetos .cab{gap:8px}
-  .card{padding:22px;gap:14px;border-radius:14px}
+  .cards{gap:16px}
+  .seta svg{width:24px;height:24px}
+  .card{flex-basis:86%;padding:22px;gap:14px;border-radius:14px}
   .card h3{font-size:18px}
   .card p{font-size:14px;line-height:1.55}
   .card .btn-borda{font-size:13px;padding:9px 16px}
@@ -147,6 +175,7 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
   .demo .detalhe{font-size:14px}
   .demo .btn-borda{font-size:14px;padding:11px 20px}
   .demo .tela{height:440px}
+  .demo .tela.retrato{--alt:440px;height:var(--alt)}
 
   #stack{padding:0 var(--margem) 48px;gap:16px}
   #stack .tags{gap:8px}
@@ -160,6 +189,9 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
 
   footer{flex-direction:column;gap:6px;padding:20px var(--margem);font-size:11px}
 }
+@media (max-width:380px){
+  .nav-direita,.nav-redes{gap:8px}
+}
 </style>
 </head>
 <body>
@@ -171,17 +203,13 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
     <div class="secoes">
       <a href="#sobre-mim" class="link">Sobre</a>
       <a href="#projetos" class="link">Projetos</a>
-      <a href="#contato" class="link">Contato</a>
     </div>
     <div class="nav-redes">
       <a href="https://github.com/CassiaCristina0o" aria-label="GitHub de Cassia Cristina" class="chip-rede link">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
         <span class="nome">GitHub</span>
       </a>
-      <a href="https://www.linkedin.com/in/cassia-cristina-ribeiro-734709255" aria-label="LinkedIn de Cassia Cristina" class="chip-rede link">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.5 0h-11A2.5 2.5 0 0 0 0 2.5v11A2.5 2.5 0 0 0 2.5 16h11a2.5 2.5 0 0 0 2.5-2.5v-11A2.5 2.5 0 0 0 13.5 0ZM4.94 13.44H2.4V6h2.54v7.44ZM3.67 4.93a1.47 1.47 0 1 1 0-2.94 1.47 1.47 0 0 1 0 2.94Zm9.77 8.51h-2.53V9.83c0-.86-.02-1.97-1.2-1.97-1.2 0-1.39.94-1.39 1.91v3.67H5.8V6h2.43v1.02h.03c.34-.64 1.16-1.32 2.39-1.32 2.56 0 3.03 1.68 3.03 3.87v3.87Z"/></svg>
-        <span class="nome">LinkedIn</span>
-      </a>
+      <a href="#contato" class="btn-vinho nav-cta">Fale comigo</a>
     </div>
   </div>
 </nav>
@@ -193,7 +221,6 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
     <p class="lema">Automação e integração em Python com foco em <em>confiabilidade operacional</em>.</p>
     <div class="botoes">
       <a href="#projetos" class="btn-vinho">Ver projetos</a>
-      <a href="#contato" class="btn-vinho">Falar comigo</a>
     </div>
   </div>
   <button type="button" class="avatar" id="avatar" aria-label="Virar a foto">
@@ -215,7 +242,9 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
     <div class="rotulo">Projetos</div>
     <h2 class="titulo-secao">O que eu construí</h2>
   </div>
-  <div class="cards">
+  <div class="carrossel" role="region" aria-roledescription="carrossel" aria-label="Projetos">
+  <div class="palco">
+  <div class="cards" tabindex="0">
     <div class="card">
       <div class="pilula">Automação de comunidades</div>
       <h3>Bot de bom dia e sorteio no Discord</h3>
@@ -225,9 +254,17 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
     </div>
 
     <div class="card">
+      <div class="pilula">Agenda no WhatsApp</div>
+      <h3>Sua agenda no WhatsApp, com lembrete na hora certa</h3>
+      <p>Você escreve “dentista 25/08 14h” no WhatsApp e o compromisso está marcado, sem baixar aplicativo e sem formulário. O bot avisa você 1 semana, 3 dias e 3 horas antes, e de novo na hora, na mesma conversa. A lista é só sua, o bot só atende números autorizados e uma trava impede o excesso de mensagens.</p>
+      <a href="https://github.com/CassiaCristina0o/agenda-whatsapp" class="btn-borda">Ver o código no GitHub</a>
+      <div class="tecnologias">Python · FastAPI · SQLAlchemy · SQLite · Evolution API</div>
+    </div>
+
+    <div class="card">
       <div class="pilula">Integração GitHub ↔ Discord</div>
-      <h3>Upstreamer: PRs do GitHub no Discord</h3>
-      <p>Bot que mantém um time informado sobre os forks e os pull requests enviados ao repositório original, em duas salas do Discord. Na sala privada, um painel fixado mostra se o fork está em dia e cada push chega na hora, com um botão que leva a mudança para a sala do time quando o pull request está aberto. Na sala do time, um painel mostra o ritmo do projeto e cada pull request ganha uma mensagem única, com barra colorida, status e imagem, editada conforme ele avança. Um farol de quatro cores (azul, amarelo, verde e vermelho) é revisado quatro vezes ao dia. Roda como Cloudflare Worker em Python, com o estado guardado nas próprias mensagens, a assinatura de cada requisição verificada e os repositórios lidos por um token somente leitura.</p>
+      <h3>Upstreamer: cada PR do GitHub, em dia no Discord</h3>
+      <p>Acompanhar um projeto no GitHub dá trabalho. O Upstreamer leva isso para o Discord: cada push chega na hora numa sala privada e, com um clique, a mudança segue para a sala do time. Lá, cada pull request vira uma única mensagem, com barra colorida, status e imagem, que se atualiza sozinha enquanto ele avança. Um painel mostra se o fork está em dia e o ritmo do projeto, e um farol de quatro cores resume a situação de cada PR, revisado quatro vezes ao dia. Funciona sem banco de dados e só lê os seus repositórios, sem mexer no código.</p>
       <a href="https://github.com/CassiaCristina0o/upstreamer" class="btn-borda">Ver o código no GitHub</a>
       <div class="tecnologias">Python · Cloudflare Workers · GitHub Webhooks · Discord API</div>
     </div>
@@ -240,37 +277,67 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
       <div class="tecnologias">Python · requests · pandas · Excel</div>
     </div>
   </div>
+  <button type="button" class="seta seta-ant" aria-label="Projeto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></button>
+  <button type="button" class="seta seta-prox" aria-label="Próximo projeto"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></button>
+  </div>
+  <div class="controles">
+    <div class="pontos"></div>
+  </div>
+  </div>
 </section>
 
 <section id="demo">
   <div class="rotulo">Veja funcionando</div>
 
-  <div class="demo">
-    <div class="texto">
-      <div class="pilula">Automação de dados (ETL)</div>
-      <h3>Análise do cartão corporativo</h3>
-      <p class="destaque"><strong>ETL em Python que coleta e trata o uso do cartão corporativo do governo federal e entrega uma planilha Excel com os dados organizados em abas.</strong> Clique em ▶ para ver o processo rodando aqui no seu navegador, com uma amostra de 3 meses. Por privacidade (LGPD), dados pessoais como nome e CPF foram ocultados.</p>
-      <p class="detalhe">Robô que coleta todo mês os arquivos do cartão corporativo do governo federal, limpa os dados, descobre o estado de cada transação, separa compra, saque e gasto sigiloso e entrega uma planilha Excel com uma aba para cada visão. Se um mês ainda não saiu ou um arquivo vem quebrado, ele registra a pendência e segue para o próximo.</p>
-      <a href="https://github.com/CassiaCristina0o/analise-cartao-corporativo" class="btn-borda">Ver o código no GitHub</a>
-      <div class="tecnologias">Python · Pandas · SQLite · Excel</div>
+  <div class="carrossel" role="region" aria-roledescription="carrossel" aria-label="Veja funcionando">
+    <div class="palco">
+      <div class="cards demos" tabindex="0">
+      <div class="demo">
+      <div class="texto">
+        <div class="pilula">Tarefa agendada</div>
+        <h3>Notícia do dia às 8h</h3>
+        <p class="destaque"><strong>Tarefa agendada em Python e GitHub Actions que escolhe uma notícia por dia e a publica aqui às 8h.</strong></p>
+        <p class="detalhe">Toda manhã o workflow lê o feed da BBC News Brasil e escolhe uma notícia. Descarta o que tem tema negativo ou político, ignora o que não é matéria escrita e não repete. A notícia fica guardada e a página a publica às 8h do dia seguinte, no horário de Brasília. Assim a hora de publicação não depende da hora em que a tarefa roda, que o GitHub pode atrasar por horas. Guarda só o título, o link, a fonte e a miniatura. Se algo falha, o workflow marca o erro e o GitHub avisa por e-mail; dia sem notícia nova fica registrado no log, sem alerta, e a página segue na última publicada.</p>
+        <a href="https://github.com/CassiaCristina0o/noticias-diaria" class="btn-borda">Ver o código no GitHub</a>
+        <div class="tecnologias">Python · GitHub Actions · RSS</div>
+      </div>
+      <div class="tela">
+        <iframe src="https://cassiacristina0o.github.io/noticias-diaria/" title="Notícia do dia escolhida pela tarefa agendada" loading="lazy"></iframe>
+      </div>
     </div>
-    <div class="tela">
-      <iframe src="demo-etl/" title="Demonstração: o robô do cartão corporativo rodando no navegador" loading="lazy"></iframe>
-    </div>
-  </div>
 
-  <div class="demo">
-    <div class="texto">
-      <div class="pilula">Tarefa agendada</div>
-      <h3>Notícia do dia às 8h</h3>
-      <p class="destaque"><strong>Tarefa agendada em Python e GitHub Actions que escolhe uma notícia por dia e a publica aqui às 8h.</strong></p>
-      <p class="detalhe">Toda manhã o workflow lê o feed da BBC News Brasil e escolhe uma notícia. Descarta o que tem tema negativo ou político, ignora o que não é matéria escrita e não repete. A notícia fica guardada e a página a publica às 8h do dia seguinte, no horário de Brasília. Assim a hora de publicação não depende da hora em que a tarefa roda, que o GitHub pode atrasar por horas. Guarda só o título, o link, a fonte e a miniatura. Se algo falha, o workflow marca o erro e o GitHub avisa por e-mail; dia sem notícia nova fica registrado no log, sem alerta, e a página segue na última publicada.</p>
-      <a href="https://github.com/CassiaCristina0o/noticias-diaria" class="btn-borda">Ver o código no GitHub</a>
-      <div class="tecnologias">Python · GitHub Actions · RSS</div>
+    <div class="demo">
+      <div class="texto">
+        <div class="pilula">Automação de dados (ETL)</div>
+        <h3>Análise do cartão corporativo</h3>
+        <p class="destaque"><strong>ETL em Python que coleta e trata o uso do cartão corporativo do governo federal e entrega uma planilha Excel com os dados organizados em abas.</strong> Clique em ▶ para ver o processo rodando aqui no seu navegador, com uma amostra de 3 meses. Por privacidade (LGPD), dados pessoais como nome e CPF foram ocultados.</p>
+        <p class="detalhe">Robô que coleta todo mês os arquivos do cartão corporativo do governo federal, limpa os dados, descobre o estado de cada transação, separa compra, saque e gasto sigiloso e entrega uma planilha Excel com uma aba para cada visão. Se um mês ainda não saiu ou um arquivo vem quebrado, ele registra a pendência e segue para o próximo.</p>
+        <a href="https://github.com/CassiaCristina0o/analise-cartao-corporativo" class="btn-borda">Ver o código no GitHub</a>
+        <div class="tecnologias">Python · Pandas · SQLite · Excel</div>
+      </div>
+      <div class="tela">
+        <iframe data-src="demo-etl/" title="Demonstração: o robô do cartão corporativo rodando no navegador"></iframe>
+      </div>
     </div>
-    <div class="tela">
-      <iframe src="https://cassiacristina0o.github.io/noticias-diaria/" title="Notícia do dia escolhida pela tarefa agendada" loading="lazy"></iframe>
+  
+    <div class="demo">
+      <div class="texto">
+        <div class="pilula">Jogo no navegador</div>
+        <h3>Color Battle: quem sobra?</h3>
+        <p class="destaque"><strong>Jogo em Python e pygame que roda no navegador, no celular ou no computador, sem instalar nada.</strong> Toque em jogar e assista à partida.</p>
+        <p class="detalhe">Bolinhas coloridas presas à borda por linhas disputam uma arena circular que vai encolhendo. Encostar na linha de outra cor corta a linha, e vence a última bolinha que ainda tem linhas. Você pode apostar na cor campeã, escolher de 2 a 10 bolinhas e mudar a velocidade durante a partida. Em português e inglês. Na primeira vez, pode levar até 1 minuto para carregar.</p>
+        <a href="https://github.com/CassiaCristina0o/color-battle" class="btn-borda">Ver o código no GitHub</a>
+        <div class="tecnologias">Python · pygame · pygbag · WebAssembly</div>
+      </div>
+      <div class="tela retrato">
+        <iframe data-src="https://cassiacristina0o.github.io/color-battle/" title="Color Battle, jogo de bolinhas rodando no navegador"></iframe>
+      </div>
     </div>
+      </div>
+      <button type="button" class="seta seta-ant" aria-label="Demonstração anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 5 8 12 15 19"/></svg></button>
+      <button type="button" class="seta seta-prox" aria-label="Próxima demonstração"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 5 16 12 9 19"/></svg></button>
+    </div>
+    <div class="controles"><div class="pontos"></div></div>
   </div>
 </section>
 
@@ -388,6 +455,63 @@ avatar.addEventListener('click', () => {
   agendarGiro();
 });
 agendarGiro();
+
+const carregarVisivel = new IntersectionObserver((entradas) => {
+  entradas.forEach((entrada) => {
+    if (!entrada.isIntersecting) return;
+    entrada.target.querySelectorAll('iframe[data-src]').forEach((quadro) => {
+      quadro.src = quadro.dataset.src;
+      quadro.removeAttribute('data-src');
+    });
+    carregarVisivel.unobserve(entrada.target);
+  });
+}, { root: null, threshold: 0.25 });
+document.querySelectorAll('.demos .demo').forEach((demo) => carregarVisivel.observe(demo));
+
+document.querySelectorAll('.carrossel').forEach((raiz) => {
+  const trilho = raiz.querySelector('.cards');
+  const cartoes = [...trilho.children];
+  const pontos = raiz.querySelector('.pontos');
+  const anterior = raiz.querySelector('.seta-ant');
+  const proximo = raiz.querySelector('.seta-prox');
+
+  const passo = () => cartoes[1].offsetLeft - cartoes[0].offsetLeft;
+
+  function paradas() {
+    const maximo = trilho.scrollWidth - trilho.clientWidth;
+    return Math.max(1, Math.min(cartoes.length, Math.round(maximo / passo()) + 1));
+  }
+
+  function posicaoAtual() {
+    return Math.min(paradas() - 1, Math.round(trilho.scrollLeft / passo()));
+  }
+
+  function atualizar() {
+    const atual = posicaoAtual();
+    [...pontos.children].forEach((p, i) => p.setAttribute('aria-current', i === atual ? 'true' : 'false'));
+    anterior.disabled = trilho.scrollLeft <= 1;
+    proximo.disabled = trilho.scrollLeft >= trilho.scrollWidth - trilho.clientWidth - 1;
+  }
+
+  function desenharPontos() {
+    pontos.replaceChildren();
+    for (let i = 0; i < paradas(); i++) {
+      const ponto = document.createElement('button');
+      ponto.type = 'button';
+      ponto.className = 'ponto';
+      ponto.setAttribute('aria-label', 'Ir para o item ' + (i + 1));
+      ponto.addEventListener('click', () => trilho.scrollTo({ left: i * passo() }));
+      pontos.append(ponto);
+    }
+    atualizar();
+  }
+
+  anterior.addEventListener('click', () => trilho.scrollBy({ left: -passo() }));
+  proximo.addEventListener('click', () => trilho.scrollBy({ left: passo() }));
+  trilho.addEventListener('scroll', atualizar, { passive: true });
+  window.addEventListener('resize', desenharPontos);
+  desenharPontos();
+});
 </script>
 </body>
 </html>
