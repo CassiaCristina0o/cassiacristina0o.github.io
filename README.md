@@ -2,13 +2,13 @@
 
 Site: **https://cassiacristina0o.github.io/**
 
-Portfólio de automação e integração em Python. É uma página única, em HTML e CSS, que se adapta sozinha ao celular e ao computador. A página do portfólio não usa JavaScript; só a demonstração do ETL usa, por causa do stlite.
+Portfólio de automação e integração em Python. É uma página única, em HTML e CSS, que se adapta sozinha ao celular e ao computador. O JavaScript fica restrito ao formulário de contato e à demonstração do ETL (stlite).
 
 ## O que tem no site
 
 - **Projetos:** [Zm-bot](https://github.com/CassiaCristina0o/Zm-bot-), [Upstreamer](https://github.com/CassiaCristina0o/upstreamer) e [análise do cartão corporativo](https://github.com/CassiaCristina0o/analise-cartao-corporativo).
 - **Veja funcionando:** o ETL do cartão corporativo rodando no navegador e a [notícia do dia](https://github.com/CassiaCristina0o/noticias-diaria), publicada todo dia às 8h, escolhida na véspera por uma tarefa agendada.
-- **Contato:** GitHub, LinkedIn, Discord e X, com um QR code que abre este site.
+- **Contato:** um formulário (nome, e-mail e o que você precisa) que chega no meu e-mail, e também GitHub, LinkedIn, Discord e X, com um QR code que abre este site.
 
 ## Arquivos
 

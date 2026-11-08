@@ -50,7 +50,14 @@ nav{height:96px;padding:0 var(--margem);display:flex;align-items:center;justify-
 #topo .lema{font-size:clamp(20px,2.4vw,26px);line-height:1.4;max-width:760px}
 #topo .lema em{font-family:'Fraunces',serif;color:var(--ouro)}
 #topo .botoes{display:flex;gap:16px;margin-top:20px}
-#topo img{width:340px;height:340px;object-fit:cover;object-position:50% 18%;border-radius:50%;border:2px solid var(--ouro);box-shadow:0 0 60px rgba(0,120,85,.45);flex-shrink:0}
+#topo .avatar{width:340px;height:340px;padding:0;border:0;background:none;border-radius:50%;cursor:pointer;perspective:900px;flex-shrink:0;box-shadow:0 0 60px rgba(0,120,85,.45)}
+#topo .avatar-miolo{display:block;width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.4,.1,.2,1)}
+#topo .avatar.virado .avatar-miolo{transform:rotateY(180deg)}
+#topo .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;border:2px solid var(--ouro);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+#topo .avatar .frente{object-position:50% 18%}
+#topo .avatar .verso{transform:rotateY(180deg)}
+#topo .avatar:focus-visible{outline:2px solid var(--ouro);outline-offset:6px}
+@media (prefers-reduced-motion:reduce){#topo .avatar-miolo{transition:none}}
 
 #sobre-mim{padding:72px var(--margem);display:flex;flex-direction:column;gap:20px;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
 #sobre-mim p{max-width:1000px;font-size:clamp(16px,1.6vw,22px);line-height:1.65}
@@ -82,6 +89,19 @@ nav{height:96px;padding:0 var(--margem);display:flex;align-items:center;justify-
 #contato .texto{display:flex;flex-direction:column;gap:24px;max-width:560px}
 #contato .redes{display:flex;flex-direction:column;gap:14px;margin-top:8px}
 #contato .redes a{display:flex;align-items:center;gap:12px;font-size:16px}
+.contato-form{display:flex;flex-direction:column;gap:16px;margin-top:16px;width:100%;max-width:520px}
+.contato-form label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--texto-suave)}
+.contato-form input,.contato-form textarea{font:inherit;font-size:15px;color:var(--texto);background:var(--fundo);border:1px solid var(--linha);border-radius:8px;padding:12px 14px;width:100%}
+.contato-form textarea{min-height:120px;resize:vertical}
+.contato-form input:focus,.contato-form textarea:focus{outline:none;border-color:var(--ouro)}
+.contato-form .btn-vinho{align-self:flex-start;border:0;cursor:pointer;font-family:inherit}
+.contato-form .btn-vinho:disabled{opacity:.6;cursor:wait}
+.aviso{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:10;max-width:min(520px,calc(100vw - 32px));display:flex;align-items:center;gap:16px;background:var(--painel-demo);color:var(--texto);border:1px solid var(--ouro);border-radius:12px;padding:16px 20px;font-size:15px;line-height:1.5;box-shadow:0 8px 32px rgba(0,0,0,.45)}
+.aviso[hidden]{display:none}
+.aviso.erro{border-color:#c0504d}
+.aviso button{flex-shrink:0;background:none;border:0;color:var(--texto-suave);font-size:24px;line-height:1;cursor:pointer;padding:0 4px}
+.aviso button:hover{color:var(--ouro)}
+.contato-form .armadilha{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 #contato .qr{width:200px;height:200px;flex-shrink:0;border-radius:12px;display:block}
 
 footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--texto-suave)}
@@ -108,7 +128,7 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
   #topo .texto{gap:16px}
   #topo .botoes{flex-direction:column;gap:12px;margin-top:16px;align-self:stretch}
   #topo .botoes a{text-align:center;padding:14px 22px}
-  #topo img{width:168px;height:168px;align-self:flex-start;box-shadow:0 0 40px rgba(0,120,85,.45)}
+  #topo .avatar{width:168px;height:168px;align-self:flex-start;box-shadow:0 0 40px rgba(0,120,85,.45)}
 
   #sobre-mim{padding:40px var(--margem);gap:14px}
   #projetos{padding:48px var(--margem);gap:28px}
@@ -176,7 +196,12 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
       <a href="#contato" class="btn-vinho">Falar comigo</a>
     </div>
   </div>
-  <img src="avatar.jpg" alt="Avatar de Cassia Cristina">
+  <button type="button" class="avatar" id="avatar" aria-label="Virar a foto">
+    <span class="avatar-miolo">
+      <img class="frente" src="avatar.jpg" alt="Avatar em desenho de Cassia Cristina">
+      <img class="verso" src="avatar2.jpg" alt="Outra foto de Cassia Cristina" loading="lazy">
+    </span>
+  </button>
 </section>
 
 <section id="sobre-mim">
@@ -277,9 +302,28 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
         x.com/Cristinycr
       </a>
     </div>
+    <form class="contato-form" action="https://script.google.com/macros/s/AKfycbzsW5ynIPeAvVnjZAbqHjEJVPks3bs4TWrUJo1Fo9w-e3HWOZJ_QZIy6L-hraA79WX5/exec" method="post">
+      <label>Seu nome
+        <input type="text" name="nome" required autocomplete="name">
+      </label>
+      <label>Seu e-mail
+        <input type="email" name="email" required autocomplete="email">
+      </label>
+      <label>O que você precisa
+        <textarea name="mensagem" rows="5" required></textarea>
+      </label>
+      <input class="armadilha" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit" class="btn-vinho">Enviar mensagem</button>
+    </form>
   </div>
   <img class="qr" src="qrcode.svg" alt="QR code que abre este site: cassiacristina0o.github.io">
 </section>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite" hidden>
+  <span id="aviso-texto"></span>
+  <button type="button" id="aviso-fechar" aria-label="Fechar aviso">×</button>
+</div>
+
 
 <footer>
   <span>cassia cristina — automação &amp; integração em Python</span>
@@ -287,5 +331,63 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
 </footer>
 
 </div>
+<script>
+const formulario = document.querySelector('.contato-form');
+const botao = formulario.querySelector('button[type="submit"]');
+const aviso = document.getElementById('aviso');
+const avisoTexto = document.getElementById('aviso-texto');
+let temporizador;
+
+function mostrarAviso(texto, erro) {
+  avisoTexto.textContent = texto;
+  aviso.classList.toggle('erro', erro);
+  aviso.hidden = false;
+  clearTimeout(temporizador);
+  temporizador = setTimeout(() => { aviso.hidden = true; }, 8000);
+}
+
+document.getElementById('aviso-fechar').addEventListener('click', () => { aviso.hidden = true; });
+
+formulario.addEventListener('submit', async (evento) => {
+  evento.preventDefault();
+  botao.disabled = true;
+  botao.textContent = 'Enviando…';
+  try {
+    const resposta = await fetch(formulario.action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8', 'Accept': 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(formulario)))
+    });
+    const dados = await resposta.json().catch(() => ({}));
+    if (!resposta.ok || dados.ok === false || dados.success === false) throw new Error('falha no envio');
+    formulario.reset();
+    mostrarAviso('Mensagem enviada. Vou responder para o e-mail que você informou.', false);
+  } catch (erro) {
+    mostrarAviso('Não consegui enviar agora. Tente de novo em instantes ou fale comigo pelo LinkedIn.', true);
+  } finally {
+    botao.disabled = false;
+    botao.textContent = 'Enviar mensagem';
+  }
+});
+
+const avatar = document.getElementById('avatar');
+const semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let giro;
+
+function virarAvatar() {
+  avatar.classList.toggle('virado');
+}
+
+function agendarGiro() {
+  clearInterval(giro);
+  if (!semMovimento) giro = setInterval(virarAvatar, 5000);
+}
+
+avatar.addEventListener('click', () => {
+  virarAvatar();
+  agendarGiro();
+});
+agendarGiro();
+</script>
 </body>
 </html>
