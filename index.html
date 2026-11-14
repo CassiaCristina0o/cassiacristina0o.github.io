@@ -106,11 +106,14 @@ html{scroll-padding-top:72px}
 #stack .tags{display:flex;flex-wrap:wrap;gap:12px;max-width:980px}
 .tag{font-family:'JetBrains Mono',monospace;font-size:14px;border:1px solid var(--linha);border-radius:8px;padding:8px 16px}
 
-#contato{padding:100px var(--margem);background:var(--painel);border-top:1px solid var(--linha);display:flex;justify-content:space-between;align-items:center;gap:80px}
+#contato{padding:100px var(--margem);background:var(--painel);border-top:1px solid var(--linha);display:flex;justify-content:space-between;align-items:flex-start;gap:80px}
 #contato .texto{display:flex;flex-direction:column;gap:24px;max-width:560px}
 #contato .redes{display:flex;flex-direction:column;gap:14px;margin-top:8px}
 #contato .redes a{display:flex;align-items:center;gap:12px;font-size:16px}
-.contato-form{display:flex;flex-direction:column;gap:16px;margin-top:16px;width:100%;max-width:520px}
+.contato-form{display:flex;flex-direction:column;gap:16px;width:100%;max-width:575px}
+#contato .qr-card{display:flex;align-items:center;gap:20px;margin-top:16px;padding:16px;border:1px solid var(--linha);border-radius:16px;max-width:350px}
+#contato .qr-card div{display:flex;flex-direction:column;gap:4px;font-size:15px}
+#contato .qr-card span{font-size:13px;color:var(--texto-suave)}
 .contato-form label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--texto-suave)}
 .contato-form input,.contato-form textarea{font:inherit;font-size:15px;color:var(--texto);background:var(--fundo);border:1px solid var(--linha);border-radius:8px;padding:12px 14px;width:100%}
 .contato-form textarea{min-height:120px;resize:vertical}
@@ -123,7 +126,7 @@ html{scroll-padding-top:72px}
 .aviso button{flex-shrink:0;background:none;border:0;color:var(--texto-suave);font-size:24px;line-height:1;cursor:pointer;padding:0 4px}
 .aviso button:hover{color:var(--ouro)}
 .contato-form .armadilha{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
-#contato .qr{width:200px;height:200px;flex-shrink:0;border-radius:12px;display:block}
+#contato .qr{width:115px;height:115px;flex-shrink:0;border-radius:8px;display:block}
 
 footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--texto-suave)}
 
@@ -181,11 +184,12 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
   #stack .tags{gap:8px}
   .tag{font-size:12px;padding:6px 12px}
 
-  #contato{padding:48px var(--margem);flex-direction:column-reverse;align-items:center;gap:32px}
+  #contato{padding:48px var(--margem);flex-direction:column;align-items:center;gap:32px}
   #contato .texto{align-items:center;gap:16px}
   #contato .redes{align-items:center;gap:14px}
   #contato .redes a{font-size:14px;gap:10px}
-  #contato .qr{width:168px;height:168px}
+  #contato .qr{width:96px;height:96px}
+  #contato .qr-card{max-width:none;width:100%}
 
   footer{flex-direction:column;gap:6px;padding:20px var(--margem);font-size:11px}
 }
@@ -369,7 +373,12 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
         x.com/Cristinycr
       </a>
     </div>
-    <form class="contato-form" action="https://script.google.com/macros/s/AKfycbzsW5ynIPeAvVnjZAbqHjEJVPks3bs4TWrUJo1Fo9w-e3HWOZJ_QZIy6L-hraA79WX5/exec" method="post">
+    <div class="qr-card">
+      <img class="qr" src="qrcode.svg" alt="QR code que abre este site: cassiacristina0o.github.io">
+      <div><strong>Compartilhe este portfólio</strong><span>aponte a câmera do celular</span></div>
+    </div>
+  </div>
+  <form class="contato-form" action="https://script.google.com/macros/s/AKfycbzsW5ynIPeAvVnjZAbqHjEJVPks3bs4TWrUJo1Fo9w-e3HWOZJ_QZIy6L-hraA79WX5/exec" method="post">
       <label>Seu nome
         <input type="text" name="nome" required autocomplete="name">
       </label>
@@ -382,8 +391,6 @@ footer{padding:28px var(--margem);background:var(--painel);display:flex;justify-
       <input class="armadilha" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button type="submit" class="btn-vinho">Enviar mensagem</button>
     </form>
-  </div>
-  <img class="qr" src="qrcode.svg" alt="QR code que abre este site: cassiacristina0o.github.io">
 </section>
 
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden>
